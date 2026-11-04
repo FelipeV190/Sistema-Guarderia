@@ -1,0 +1,14 @@
+{
+  "name": "sistema-guarderia-fis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de gestion para guarderias - Proyecto de Fundamentos de Ingenieria de Software (Pontificia Universidad Javeriana)",
+  "scripts": {
+    "test": "node pruebas/pruebas-dominio.js",
+    "test:ui": "node pruebas/pruebas-interfaz.js",
+    "test:all": "node pruebas/pruebas-dominio.js && node pruebas/pruebas-interfaz.js"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
