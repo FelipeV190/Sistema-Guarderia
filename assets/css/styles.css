@@ -232,12 +232,6 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
 .badge--brand { background: var(--brand-soft); color: var(--brand-strong); }
 .badge--accent { background: var(--accent-soft); color: var(--accent); }
 
-.tag-rf {
-  font-family: var(--mono); font-size: .7rem; font-weight: 600;
-  background: var(--brand-soft); color: var(--brand-strong);
-  padding: .1rem .38rem; border-radius: 5px; white-space: nowrap;
-}
-
 /* ---------- Tables ---------- */
 .table-wrap { overflow-x: auto; }
 table.data { width: 100%; border-collapse: collapse; font-size: .89rem; }

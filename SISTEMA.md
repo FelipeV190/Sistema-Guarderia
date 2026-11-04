@@ -17,7 +17,7 @@ navegador, por lo que cada evaluador puede trabajar con su propia copia de los d
 | Servidor local | `python -m http.server` en la raíz y abrir `http://localhost:8000`. |
 | GitHub Pages | Settings → Pages → Branch `main` / carpeta `/root`. El sitio queda publicado sobre **HTTPS**, como exige HU-04 AC4. |
 
-Para volver a los datos originales: **Requerimientos → Restablecer datos de demostración**.
+Para volver a los datos originales: botón **Restablecer datos de demostración** en la pantalla de ingreso.
 
 ### Usuarios de prueba
 
@@ -72,7 +72,6 @@ assets/js/
   views-grupos.js           HU-05 y HU-06: grupos etarios y docentes
   views-pagos.js            HU-03: pagos, estado de cuenta y comprobante
   views-portal.js           HU-04: portal del acudiente
-  views-requisitos.js       Trazabilidad y pruebas de seguridad en vivo
   app.js                    Enrutador por hash y control de acceso de cada ruta
 pruebas/
   pruebas-dominio.js        77 pruebas de reglas de negocio (solo Node)
@@ -102,9 +101,6 @@ siempre es consistente: `saldo = cargos − pagos`.
 ---
 
 ## 4. Trazabilidad de requerimientos
-
-La aplicación incluye esta misma tabla en vivo en **Requerimientos → Trazabilidad**,
-con la forma de verificar cada punto.
 
 | Código | Requerimiento | HU | Implementación |
 |---|---|---|---|
@@ -164,10 +160,6 @@ Incluyen los casos límite pedidos en las historias: bordes de rango de edad (11
 24 meses), capacidad máxima alcanzada, documento inválido, más de tres acudientes,
 información médica vacía, pago con fecha futura o valor negativo, docente y acudiente
 intentando acceder a información ajena, y sesión expirada.
-
-La aplicación además trae un panel de **pruebas de seguridad** en vivo
-(Requerimientos → Pruebas de seguridad) para ejecutar los escenarios negativos
-de HU-04 durante la sustentación.
 
 ---
 

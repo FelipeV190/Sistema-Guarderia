@@ -19,17 +19,17 @@
   PERMISOS[ROLES.ADMIN] = [
     'panel', 'ninos.ver', 'ninos.detalle', 'matricula.ver', 'matricula.crear',
     'matricula.editar', 'matricula.aprobar', 'grupos.gestionar', 'docentes.asignar',
-    'pagos.ver', 'pagos.gestionar', 'auditoria', 'requisitos'
+    'pagos.ver', 'pagos.gestionar', 'auditoria'
   ];
   PERMISOS[ROLES.DOCENTE] = [
-    'panel', 'ninos.ver', 'ninos.detalle', 'requisitos'
+    'panel', 'ninos.ver', 'ninos.detalle'
   ];
   PERMISOS[ROLES.ADMINISTRATIVO] = [
     'panel', 'ninos.ver', 'ninos.detalle', 'matricula.ver',
-    'pagos.ver', 'pagos.gestionar', 'requisitos'
+    'pagos.ver', 'pagos.gestionar'
   ];
   PERMISOS[ROLES.ACUDIENTE] = [
-    'portal', 'ninos.detalle', 'requisitos'
+    'portal', 'ninos.detalle'
   ];
 
   var ETIQUETA_PERMISO = {

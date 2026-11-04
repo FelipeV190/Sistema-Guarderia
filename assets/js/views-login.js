@@ -22,7 +22,7 @@
     var avisoSesion = '';
     if (motivo === 'inactiva') {
       avisoSesion = UI.alerta('warn', '<strong>Su sesión expiró por inactividad.</strong> ' +
-        'Por seguridad la información del menor no se muestra sin una sesión válida (RF-15).');
+        'Por seguridad la información del menor no se muestra sin una sesión válida.');
     } else if (motivo === 'expirada') {
       avisoSesion = UI.alerta('danger', '<strong>Sesión inválida.</strong> ' +
         'Vuelva a autenticarse para continuar.');
@@ -80,6 +80,8 @@
       '<p class="card__hint" style="margin-top:.6rem">Maqueta académica: los datos se guardan en ' +
       'el navegador (localStorage) y las contraseñas son de demostración. En producción el acceso ' +
       'se sirve sobre HTTPS/TLS y las credenciales se almacenan con hash en el servidor.</p>' +
+      '<button type="button" class="btn btn--ghost btn--sm" id="btn-reset" style="margin-top:.6rem">' +
+      'Restablecer datos de demostración</button>' +
       '</div>' +
 
       '</div></div></div>'
@@ -92,6 +94,22 @@
         form.elements.email.value = b.getAttribute('data-email');
         form.elements.clave.value = b.getAttribute('data-clave');
         form.elements.clave.focus();
+      });
+    });
+
+    UI.$('#btn-reset').addEventListener('click', function () {
+      UI.confirmar({
+        titulo: 'Restablecer datos',
+        mensaje: 'Se eliminarán los cambios realizados y se recargarán los datos de demostración. ' +
+          '¿Desea continuar?',
+        textoOk: 'Restablecer', claseOk: 'btn--danger',
+        onOk: function () {
+          Store.reset();
+          UI.cerrarModal();
+          UI.toast('Datos de demostración restablecidos.', 'ok');
+          Vistas.login();
+          return true;
+        }
       });
     });
 

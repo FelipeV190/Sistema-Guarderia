@@ -86,17 +86,9 @@
         '<div class="page-head__text">' +
         '<h1>' + U.esc(opts.titulo) + '</h1>' +
         (opts.desc ? '<p>' + opts.desc + '</p>' : '') +
-        (opts.rf ? '<p>' + UI.rf(opts.rf) + '</p>' : '') +
         '</div>' +
         (opts.acciones ? '<div class="page-head__actions">' + opts.acciones + '</div>' : '') +
         '</div>';
-    },
-
-    /* Etiquetas de trazabilidad a requerimientos */
-    rf: function (codigos) {
-      return (codigos || []).map(function (c) {
-        return '<span class="tag-rf">' + U.esc(c) + '</span>';
-      }).join(' ');
     },
 
     /* ---------- Badges ---------- */

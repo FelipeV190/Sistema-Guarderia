@@ -27,8 +27,7 @@
        su propio control de acceso a nivel de registro (RF-14). */
     { patron: 'pagos/comprobante/:id', vista: 'comprobante' },
     { patron: 'portal', vista: 'portal', permiso: 'portal' },
-    { patron: 'auditoria', vista: 'auditoria', permiso: 'auditoria' },
-    { patron: 'requisitos', vista: 'requisitos', permiso: 'requisitos' }
+    { patron: 'auditoria', vista: 'auditoria', permiso: 'auditoria' }
   ];
 
   /* ---------- Menú por rol ---------- */
@@ -40,8 +39,7 @@
     { href: '#/grupos', texto: 'Grupos', permiso: 'grupos.gestionar' },
     { href: '#/docentes', texto: 'Docentes', permiso: 'docentes.asignar' },
     { href: '#/pagos', texto: 'Pagos', permiso: 'pagos.ver' },
-    { href: '#/auditoria', texto: 'Auditoría', permiso: 'auditoria' },
-    { href: '#/requisitos', texto: 'Requerimientos', permiso: 'requisitos' }
+    { href: '#/auditoria', texto: 'Auditoría', permiso: 'auditoria' }
   ];
 
   function parseHash() {
@@ -107,7 +105,7 @@
     footer.innerHTML = 'Sistema de gestión para guarderías · Proyecto de Fundamentos de Ingeniería ' +
       'de Software, Pontificia Universidad Javeriana · Los datos se almacenan ' +
       (Store.soloMemoria() ? 'en memoria (su navegador bloquea el almacenamiento local)'
-        : 'localmente en este navegador') + ' · <a href="#/requisitos">Trazabilidad de requerimientos</a>';
+        : 'localmente en este navegador');
   }
 
   /* ---------- Render ---------- */

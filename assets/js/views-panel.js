@@ -45,7 +45,7 @@
 
     /* Matrículas pendientes de aprobación (RF-06) */
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Matrículas pendientes de aprobación</h2>' + UI.rf(['RF-06', 'RF-08']) +
+      '<h2>Matrículas pendientes de aprobación</h2>' +
       '<a class="btn btn--sm" href="#/matriculas">Ver todas</a></div>';
 
     if (!pendientes.length) {
@@ -85,7 +85,7 @@
     html += '<div class="grid grid--2">';
 
     html += '<div class="card card--flush"><div class="card__head"><h2>Grupos y ocupación</h2>' +
-      UI.rf(['RF-16']) + '<a class="btn btn--sm" href="#/grupos">Administrar</a></div>' +
+      '<a class="btn btn--sm" href="#/grupos">Administrar</a></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Grupo' }, { titulo: 'Rango de edad' }, { titulo: 'Cupos', num: true }],
         filas: r.grupos.map(function (g) {
@@ -107,10 +107,10 @@
       }) + '</div>';
 
     html += '<div class="card"><div style="display:flex;gap:.6rem;align-items:center;margin-bottom:.8rem">' +
-      '<h2 style="margin-right:auto">Equipo docente</h2>' + UI.rf(['RF-18']) + '</div>' +
+      '<h2 style="margin-right:auto">Equipo docente</h2></div>' +
       (sinGrupo.length
         ? UI.alerta('warn', '<strong>' + sinGrupo.length + ' docente(s) sin grupo asignado.</strong> ' +
-          'Un docente sin grupo no puede consultar niños (RF-02). ' +
+          'Un docente sin grupo no puede consultar niños. ' +
           '<a href="#/docentes">Asignar ahora</a>.')
         : UI.alerta('ok', 'Todos los docentes tienen un grupo asignado.')) +
       '<dl class="dl">' + r.docentes.map(function (d) {
@@ -137,9 +137,8 @@
       return '<div class="card">' + UI.vacio({
         icono: '\u{1F4CB}',
         titulo: 'Todavía no tiene un grupo asignado',
-        texto: 'Su consulta de niños está restringida al grupo que le asigne el administrador ' +
-          '(RF-02 / RF-18). Solicite la asignación para ver la lista de niños a su cargo.',
-        accion: '<a class="btn" href="#/requisitos">Ver cómo funciona el sistema</a>'
+        texto: 'Su consulta de niños está restringida al grupo que le asigne el administrador. ' +
+          'Solicite la asignación para ver la lista de niños a su cargo.'
       }) + '</div>';
     }
 
@@ -156,13 +155,12 @@
 
       '<div class="card">' +
       UI.alerta('info', 'Como docente usted ve <strong>únicamente</strong> los niños del grupo ' +
-        U.esc(g.nombre) + ' de su guardería. ' + UI.rf(['RF-01', 'RF-02'])) +
+        U.esc(g.nombre) + ' de su guardería.') +
       (compa.length
         ? '<p class="small muted">Comparte el grupo con: ' +
           U.esc(compa.map(function (d) { return d.nombre; }).join(', ')) + '.</p>'
         : '') +
-      '<div class="btn-row"><a class="btn btn--primary" href="#/ninos">Consultar lista de niños</a>' +
-      '<a class="btn" href="#/requisitos">Requerimientos cubiertos</a></div>' +
+      '<div class="btn-row"><a class="btn btn--primary" href="#/ninos">Consultar lista de niños</a></div>' +
       '</div>';
   }
 
@@ -180,7 +178,6 @@
       '</div>' +
 
       '<div class="card card--flush"><div class="card__head"><h2>Alumnos con saldo pendiente</h2>' +
-      UI.rf(['RF-10']) +
       '<a class="btn btn--sm btn--primary" href="#/pagos/nuevo">Registrar pago</a></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Alumno' }, { titulo: 'Grupo' }, { titulo: 'Períodos en mora', num: true },
@@ -229,8 +226,7 @@
       UI.pageHead({
         titulo: 'Bitácora de auditoría',
         desc: 'Registro con fecha de cada operación sensible del sistema: cambios de estado de ' +
-          'matrícula, pagos, asignaciones y accesos denegados.',
-        rf: ['RNF-02']
+          'matrícula, pagos, asignaciones y accesos denegados.'
       }) +
       '<div class="card card--flush">' +
       UI.tabla({

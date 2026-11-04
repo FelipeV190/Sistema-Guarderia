@@ -30,7 +30,6 @@
       titulo: 'Grupos etarios',
       desc: 'Cada grupo se define por un rango de edad en meses y una capacidad máxima. ' +
         'El sistema usa esos rangos para clasificar automáticamente a los niños según su fecha de nacimiento.',
-      rf: ['RF-16', 'RF-17'],
       acciones: '<button class="btn btn--primary" id="btn-nuevo-grupo">Nuevo grupo</button>'
     });
 
@@ -69,7 +68,7 @@
 
     /* Revisión de clasificación automática */
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Revisión de clasificación automática</h2>' + UI.rf(['RF-17']) + '</div>';
+      '<h2>Revisión de clasificación automática</h2></div>';
 
     if (!desubicados.length) {
       html += UI.vacio({
@@ -204,8 +203,7 @@
       titulo: 'Asignación de docentes',
       desc: 'Un grupo puede tener varios docentes (titular y auxiliar), pero cada docente ' +
         'pertenece exactamente a un grupo. Al reasignar un docente, su acceso a la información ' +
-        'de los niños cambia de inmediato.',
-      rf: ['RF-18', 'RF-02']
+        'de los niños cambia de inmediato.'
     });
 
     if (!grupos.length) {
@@ -245,7 +243,7 @@
       }) + '</div>';
 
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Cobertura por grupo</h2>' + UI.rf(['RF-18']) + '</div>' +
+      '<h2>Cobertura por grupo</h2></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Grupo' }, { titulo: 'Docentes asignados' }, { titulo: 'Niños', num: true }],
         filas: grupos.map(function (g) {

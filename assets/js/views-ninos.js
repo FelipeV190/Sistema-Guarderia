@@ -24,7 +24,7 @@
     /* --- Caso RF-03 / RF-02: docente sin grupo asignado --- */
     if (esDocente && !u.grupoId) {
       UI.montar(
-        UI.pageHead({ titulo: 'Niños', desc: 'Consulta de los niños a su cargo.', rf: ['RF-02'] }) +
+        UI.pageHead({ titulo: 'Niños', desc: 'Consulta de los niños a su cargo.' }) +
         '<div class="card">' + UI.vacio({
           icono: '\u{1F4CB}',
           titulo: 'No tiene un grupo asignado',
@@ -46,7 +46,6 @@
         titulo: 'Niños de la guardería',
         desc: 'Alcance de su consulta: <strong>' + U.esc(alcance) + '</strong>. ' +
           'Se muestran nombre, apellido y edad de cada niño; seleccione una fila para ver la ficha completa.',
-        rf: esDocente ? ['RF-01', 'RF-02', 'RF-03'] : ['RF-01', 'RF-03'],
         acciones: acciones
       }) +
 
@@ -194,8 +193,7 @@
         (sug.grupo && sug.grupo.id !== g.id
           ? 'Grupo sugerido: <strong>' + U.esc(sug.grupo.nombre) + '</strong>. ' +
             '<button class="btn btn--sm" data-reclasificar>Reclasificar automáticamente</button>'
-          : 'No hay otro grupo cuyo rango corresponda; ajuste los grupos.') +
-        ' ' + UI.rf(['RF-17']));
+          : 'No hay otro grupo cuyo rango corresponda; ajuste los grupos.'));
     }
 
     html += '<div class="grid grid--2">';
@@ -221,7 +219,7 @@
 
     /* --- Información médica (RF-05) --- */
     html += '<div class="card"><div style="display:flex;gap:.5rem;align-items:center">' +
-      '<h2 style="margin-right:auto">Información médica</h2>' + UI.rf(['RF-05']) + '</div>' +
+      '<h2 style="margin-right:auto">Información médica</h2></div>' +
       '<dl class="dl" style="margin-top:.7rem">' +
       '<dt>EPS</dt><dd>' + U.esc(n.medica.eps) + '</dd>' +
       '<dt>Alergias</dt><dd>' + resaltar(n.medica.alergias) + '</dd>' +
@@ -232,7 +230,7 @@
 
     /* --- Acudientes (RF-04 / RF-07) --- */
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Acudientes autorizados</h2>' + UI.rf(['RF-04', 'RF-07']) +
+      '<h2>Acudientes autorizados</h2>' +
       '<span class="badge">' + n.acudientes.length + ' de ' + Dominio.MAX_ACUDIENTES + '</span></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Nombre' }, { titulo: 'Parentesco' }, { titulo: 'Documento' }, { titulo: 'Contacto' }],
@@ -254,7 +252,7 @@
 
     /* --- Historial de estados (RF-08 / RNF-02) --- */
     html += '<div class="card"><div style="display:flex;gap:.5rem;align-items:center">' +
-      '<h2 style="margin-right:auto">Historial de la matrícula</h2>' + UI.rf(['RF-08', 'RNF-02']) + '</div>' +
+      '<h2 style="margin-right:auto">Historial de la matrícula</h2></div>' +
       '<ul class="timeline" style="margin-top:.9rem">' +
       (n.historial || []).slice().reverse().map(function (h) {
         return '<li><div class="timeline__top">' + UI.badgeEstado(h.estado) +

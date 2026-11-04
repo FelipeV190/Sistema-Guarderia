@@ -24,7 +24,6 @@
         titulo: 'Matrículas',
         desc: 'Registro, consulta y actualización de la matrícula de cada niño: datos personales, ' +
           'acudientes autorizados, información médica y estado de la matrícula.',
-        rf: ['RF-04', 'RF-05', 'RF-06', 'RF-07', 'RF-08'],
         acciones: puedeCrear
           ? '<a class="btn btn--primary" href="#/matriculas/nueva">Nueva matrícula</a>' : ''
       }) +
@@ -129,7 +128,7 @@
         '<div class="card">' + UI.vacio({
           icono: '\u{1F465}', titulo: 'Primero cree los grupos etarios',
           texto: 'Para matricular un niño el sistema necesita al menos un grupo con rango de edad ' +
-            'y capacidad definidos, pues la clasificación es automática (RF-16 / RF-17).',
+            'y capacidad definidos, pues la clasificación es automática.',
           accion: '<a class="btn btn--primary" href="#/grupos">Crear grupos</a>'
         }) + '</div>');
       return;
@@ -147,7 +146,6 @@
             '. El estado de la matrícula se cambia desde la ficha del niño.'
           : 'Registre los datos del niño, entre 1 y 3 acudientes autorizados, el contacto de ' +
             'emergencia y la información médica relevante. Todos los campos marcados con * son obligatorios.',
-        rf: ['RF-04', 'RF-05', 'RF-07'],
         acciones: '<a class="btn" href="' + (editando ? '#/ninos/' + n.id : '#/matriculas') + '">Cancelar</a>'
       }) +
 
@@ -158,7 +156,7 @@
       '<div class="card">' +
       '<div class="form-section__title">1. Datos del niño</div>' +
       '<p class="form-section__desc">La fecha de nacimiento determina el grupo etario sugerido ' +
-      'automáticamente (RF-17).</p>' +
+      'automáticamente.</p>' +
       '<div class="form-grid">' +
       UI.campo({
         label: 'Nombres', name: 'nombres', requerido: true,
@@ -205,7 +203,7 @@
       '<div class="card">' +
       '<div class="form-section__title">2. Acudientes autorizados</div>' +
       '<p class="form-section__desc">Mínimo 1, máximo 3. Al menos uno debe tener documento de ' +
-      'identidad válido (6 a 12 dígitos) &mdash; RF-04 y RF-07.</p>' +
+      'identidad válido (6 a 12 dígitos).</p>' +
       '<p class="field__error" data-error-for="acudientes" hidden></p>' +
       '<div id="acudientes">' +
       [0, 1, 2].map(function (i) { return bloqueAcudiente(i, acs[i], i >= acs.length); }).join('') +
@@ -237,7 +235,7 @@
       /* ---- Información médica ---- */
       '<div class="card">' +
       '<div class="form-section__title">4. Información médica relevante ' +
-      UI.rf(['RF-05']) + '</div>' +
+      '</div>' +
       '<p class="form-section__desc">Obligatoria para completar la matrícula. Si no aplica, ' +
       'escriba "Ninguna" de forma explícita: el sistema no acepta campos médicos en blanco.</p>' +
       '<div class="form-grid">' +
@@ -271,7 +269,7 @@
       '<a class="btn" href="' + (editando ? '#/ninos/' + n.id : '#/matriculas') + '">Cancelar</a>' +
       '<span class="card__hint">' + (editando
         ? 'El cambio queda registrado en la bitácora de auditoría.'
-        : 'La matrícula se crea en estado Pendiente; solo un Administrador puede aprobarla (RF-06).') +
+        : 'La matrícula se crea en estado Pendiente; solo un Administrador puede aprobarla.') +
       '</span>' +
       '</div></div>' +
       '</form>'
@@ -422,7 +420,7 @@
       UI.campo({
         label: 'Correo electrónico', name: 'acudiente' + i + 'Email',
         control: UI.input('acudiente' + i + 'Email', { tipo: 'email', valor: a.email || '' }),
-        ayuda: i === 0 ? 'Se usa para vincular la cuenta del acudiente (RF-14).' : ''
+        ayuda: i === 0 ? 'Se usa para vincular la cuenta del acudiente.' : ''
       }) +
       '</div>' +
       '<button type="button" class="btn btn--sm btn--ghost" data-quitar-acudiente="' + i + '"' +
@@ -444,7 +442,7 @@
       UI.modal({
         titulo: 'Acceso denegado',
         cuerpo: UI.alerta('danger', 'Solo un usuario con rol <strong>Administrador</strong> puede ' +
-          'aprobar o rechazar una matrícula (RF-06). Su rol actual es ' + U.esc(u.rol) + '.'),
+          'aprobar o rechazar una matrícula. Su rol actual es ' + U.esc(u.rol) + '.'),
         textoCancelar: 'Entendido'
       });
       return;
@@ -471,7 +469,7 @@
         '<div class="field"><label for="nota-estado">Nota / justificación</label>' +
         '<textarea id="nota-estado" placeholder="' + U.esc(Dominio.notaPorDefecto(estado)) + '"></textarea>' +
         '<div class="field__help">Queda registrada con fecha y hora en el historial de la ' +
-        'matrícula (RF-08 / RNF-02).</div></div>',
+        'matrícula.</div></div>',
       textoOk: etiquetaDialogo(estado),
       claseOk: estado === ESTADOS.RECHAZADA || estado === ESTADOS.RETIRADA ? 'btn--danger' : 'btn--primary',
       onOk: function (modal) {

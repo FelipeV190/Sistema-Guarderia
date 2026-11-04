@@ -17,7 +17,6 @@ sin servidor ni instalación.
 
 - Manual, trazabilidad de los 18 requerimientos funcionales y decisiones de diseño:
   **[SISTEMA.md](SISTEMA.md)**
-- Dentro de la aplicación: menú **Requerimientos** (trazabilidad en vivo y pruebas de seguridad).
 
 ### Usuarios de prueba
 

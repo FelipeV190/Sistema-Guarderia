@@ -90,8 +90,9 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
   t('entra al panel', /Hola, Carolina/.test(texto()) && sinErrorDeVista('panel admin'));
   t('encabezado visible con la guardería', /Mis Primeros Pasos/.test(doc.getElementById('app-header').textContent));
   t('menú del administrador completo',
-    ['Inicio', 'Niños', 'Matrículas', 'Grupos', 'Docentes', 'Pagos', 'Auditoría', 'Requerimientos']
+    ['Inicio', 'Niños', 'Matrículas', 'Grupos', 'Docentes', 'Pagos', 'Auditoría']
       .every(x => doc.getElementById('app-header').textContent.includes(x)));
+  t('el menú ya no incluye Requerimientos', !doc.getElementById('app-header').textContent.includes('Requerimientos'));
   t('panel lista matrículas pendientes', /pendientes de aprobación/i.test(texto()));
 
   const rutasAdmin = [
@@ -106,8 +107,7 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
     ['#/pagos/nuevo', /Registrar pago/],
     ['#/pagos/estado/nin-001', /Estado de cuenta/],
     ['#/pagos/comprobante/pag-001-mat', /Comprobante/],
-    ['#/auditoria', /Bitácora de auditoría/],
-    ['#/requisitos', /Requerimientos y trazabilidad/]
+    ['#/auditoria', /Bitácora de auditoría/]
   ];
   for (const [hash, re] of rutasAdmin) {
     await ir(hash);
@@ -206,10 +206,8 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
 
   console.log('\n--- sesión inválida (RF-15) ---');
   await login('admin@guarderia.co', 'admin123');
-  await ir('#/requisitos');
-  t('la página de requisitos lista los 18 RF', (vista().match(/tag-rf/g) || []).length > 20);
-  doc.getElementById('btn-invalidar').click();
-  await esperar(120);
+  win.Auth.invalidarSesion();
+  await ir('#/pagos');
   t('RF-15: tras invalidar la sesión se deniega el acceso',
     /Acceso denegado|Iniciar sesión/.test(texto()));
 
@@ -228,6 +226,16 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
     win.Dominio.nino('nin-004').estado === 'Activa' &&
     win.Dominio.nino('nin-004').historial.length === 2);
   t('la ficha refleja el nuevo estado', /Activa/.test(texto()));
+
+  console.log('\n--- restablecer datos desde el login ---');
+  win.Auth.logout();
+  await ir('#/login');
+  doc.getElementById('btn-reset').click();
+  await esperar(80);
+  doc.querySelector('[data-modal-ok]').click();
+  await esperar(120);
+  t('restablece los datos de demostración', win.Dominio.nino('nin-004').estado !== 'Activa' &&
+    !!doc.getElementById('form-login'));
 
   console.log('\n--- consola del navegador ---');
   t('sin errores de JavaScript', errores.length === 0, errores.slice(0, 5).join(' | '));

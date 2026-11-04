@@ -14,8 +14,7 @@
 
     var html = UI.pageHead({
       titulo: 'Portal del acudiente',
-      desc: 'Información de los menores vinculados a su cuenta y su estado de cuenta.',
-      rf: ['RF-13', 'RF-14', 'RF-15']
+      desc: 'Información de los menores vinculados a su cuenta y su estado de cuenta.'
     });
 
     html += UI.alerta('info',

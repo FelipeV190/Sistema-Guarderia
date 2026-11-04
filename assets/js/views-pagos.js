@@ -32,7 +32,6 @@
       UI.pageHead({
         titulo: 'Pagos',
         desc: 'Registro de pagos de matrícula y mensualidad, saldos por alumno y comprobantes.',
-        rf: ['RF-09', 'RF-10', 'RF-11', 'RF-12'],
         acciones: Auth.puede('pagos.gestionar')
           ? '<a class="btn btn--primary" href="#/pagos/nuevo">Registrar pago</a>'
           : '<span class="badge badge--warn">Su rol solo permite consultar</span>'
@@ -47,7 +46,7 @@
       '</div>' +
 
       '<div class="card card--flush"><div class="card__head"><h2>Estado de cuenta por alumno</h2>' +
-      UI.rf(['RF-10']) + '</div>' +
+      '</div>' +
       UI.tabla({
         columnas: [{ titulo: 'Alumno' }, { titulo: 'Grupo' }, { titulo: 'Pagado', num: true },
           { titulo: 'Saldo', num: true }, { titulo: '' }],
@@ -72,7 +71,7 @@
       }) + '</div>' +
 
       '<div class="card card--flush"><div class="card__head"><h2>Historial de pagos</h2>' +
-      UI.rf(['RF-11']) + '</div>' +
+      '</div>' +
       '<div class="card__body toolbar" style="margin:0">' +
       '<input type="search" id="q" placeholder="Buscar alumno o referencia">' +
       UI.select('concepto', Seed.CONCEPTOS.map(function (c) {
@@ -154,7 +153,6 @@
         titulo: 'Registrar pago',
         desc: 'Seleccione el alumno e indique concepto, período, fecha, valor y medio de pago. ' +
           'Al guardar, el saldo del alumno se actualiza automáticamente.',
-        rf: ['RF-09', 'RF-10'],
         acciones: '<a class="btn" href="#/pagos">Cancelar</a>'
       }) +
       '<div class="grid grid--2">' +
@@ -298,7 +296,6 @@
         titulo: 'Estado de cuenta',
         desc: U.esc(Dominio.nombreCompleto(n)) + ' · grupo ' +
           U.esc(Dominio.nombreGrupo(n.grupoId)) + ' · ' + UI.badgeEstado(n.estado),
-        rf: ['RF-10', 'RF-11'],
         acciones: '<a class="btn" href="#/pagos">Volver</a>' +
           (Auth.puede('pagos.gestionar')
             ? '<a class="btn btn--primary" href="#/pagos/nuevo/' + n.id + '">Registrar pago</a>' : '')
@@ -313,7 +310,7 @@
 
     if (!c.cargos.length) {
       return '<div class="card card--flush"><div class="card__head">' +
-        '<h2>Estado de cuenta</h2>' + UI.rf(['RF-10']) + '</div>' +
+        '<h2>Estado de cuenta</h2></div>' +
         UI.vacio({
           icono: '\u{1F4C4}',
           titulo: 'Sin cargos generados',
@@ -332,7 +329,7 @@
       '</div>';
 
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Detalle por período</h2>' + UI.rf(['RF-10']) + '</div>' +
+      '<h2>Detalle por período</h2></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Período' }, { titulo: 'Concepto' }, { titulo: 'Cargado', num: true },
           { titulo: 'Pagado', num: true }, { titulo: 'Saldo', num: true }],
@@ -348,7 +345,7 @@
       }) + '</div>';
 
     html += '<div class="card card--flush"><div class="card__head">' +
-      '<h2>Historial de pagos</h2>' + UI.rf(['RF-11']) + '</div>' +
+      '<h2>Historial de pagos</h2></div>' +
       UI.tabla({
         columnas: [{ titulo: 'Fecha' }, { titulo: 'Concepto' }, { titulo: 'Período' },
           { titulo: 'Medio' }, { titulo: 'Valor', num: true }, { titulo: '' }],
@@ -397,7 +394,7 @@
 
     UI.montar(
       '<div class="page-head no-print"><div class="page-head__text">' +
-      '<h1>Comprobante de pago</h1><p>' + UI.rf(['RF-11']) + '</p></div>' +
+      '<h1>Comprobante de pago</h1></div>' +
       '<div class="page-head__actions">' +
       '<a class="btn" href="' + volver + '">Volver</a>' +
       '<button class="btn btn--primary" id="btn-imprimir">Imprimir / guardar PDF</button>' +
