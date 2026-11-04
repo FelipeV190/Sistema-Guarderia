@@ -31,7 +31,16 @@ const esperar = ms => new Promise(r => setTimeout(r, ms));
     resources: 'usable',
     url: 'file:///' + INDEX.replace(/^\//, ''),
     pretendToBeVisual: true,
-    virtualConsole: vc
+    virtualConsole: vc,
+    // Reloj fijo: los saldos esperados se calcularon con fecha 19 oct 2026
+    beforeParse(w) {
+      const FECHA_PRUEBAS = '2026-10-19T10:00:00';
+      const DateReal = w.Date;
+      w.Date = class extends DateReal {
+        constructor(...a) { super(...(a.length ? a : [FECHA_PRUEBAS])); }
+        static now() { return new DateReal(FECHA_PRUEBAS).getTime(); }
+      };
+    }
   });
   const win = dom.window;
   await new Promise(r => win.addEventListener('load', r));

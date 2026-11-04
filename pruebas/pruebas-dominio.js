@@ -13,6 +13,15 @@ global.localStorage = {
 };
 global.window = global;
 
+// Reloj fijo: los saldos esperados se calcularon con fecha 19 oct 2026.
+// Sin esto, cada mes nuevo agrega una mensualidad y las pruebas de pagos fallan.
+const FECHA_PRUEBAS = '2026-10-19T10:00:00';
+const DateReal = Date;
+global.Date = class extends DateReal {
+  constructor(...a) { super(...(a.length ? a : [FECHA_PRUEBAS])); }
+  static now() { return new DateReal(FECHA_PRUEBAS).getTime(); }
+};
+
 ['utils.js', 'seed.js', 'store.js', 'auth.js', 'domain.js'].forEach(f => {
   // eslint-disable-next-line no-eval
   eval(fs.readFileSync(path.join(base, f), 'utf8'));
