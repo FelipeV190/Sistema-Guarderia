@@ -52,6 +52,7 @@
       '<li>Pagos, saldos y comprobantes por alumno</li>' +
       '<li>Portal del acudiente con acceso restringido</li>' +
       '</ul>' +
+      '<div class="login__deco" aria-hidden="true">\u{1F9F8} \u{1F388} ⭐ \u{1F308} \u{1F9E9}</div>' +
       '<p class="small" style="margin-top:1.4rem;opacity:.8">Proyecto de Fundamentos de ' +
       'Ingeniería de Software · Pontificia Universidad Javeriana</p>' +
       '</aside>' +

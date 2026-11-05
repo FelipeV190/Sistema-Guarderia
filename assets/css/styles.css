@@ -6,16 +6,16 @@
    ============================================================ */
 
 :root {
-  --bg: #fdf9f4;
+  --bg: #fffbf7;
   --surface: #ffffff;
-  --surface-2: #faf6ff;
-  --border: #ece5f6;
-  --text: #2f2a4a;
-  --text-soft: #615b7e;
-  --text-faint: #8a84a6;
-  --brand: #7058d8;
-  --brand-strong: #5a43c2;
-  --brand-soft: #efeaff;
+  --surface-2: #fbf8ff;
+  --border: #f0e8f7;
+  --text: #3a3358;
+  --text-soft: #6b6488;
+  --text-faint: #8d87a8;
+  --brand: #7a62d8;
+  --brand-strong: #5d47c4;
+  --brand-soft: #f1ecff;
   --accent: #c25a1f;
   --accent-soft: #ffeadb;
   --ok: #23804f;
@@ -27,14 +27,21 @@
   --info: #2f6db3;
   --info-soft: #e0f0ff;
   /* Pasteles decorativos: fondos de tarjetas, avatares y adornos */
-  --p-lilac: #ece6ff;
-  --p-mint: #dcf6ea;
-  --p-peach: #ffe7d6;
-  --p-sky: #dcefff;
-  --p-pink: #ffe1ec;
-  --p-butter: #fff3c7;
-  --shadow: 0 2px 4px rgba(112, 88, 216, .06), 0 12px 32px rgba(112, 88, 216, .10);
-  --shadow-sm: 0 1px 3px rgba(112, 88, 216, .10);
+  --p-lilac: #f0ebff;
+  --p-mint: #e3f8ee;
+  --p-peach: #ffeee2;
+  --p-sky: #e4f3ff;
+  --p-pink: #ffe8f0;
+  --p-butter: #fff6d6;
+  /* Boton principal: pastel claro con texto oscuro */
+  --btn: #d9cdff;
+  --btn-hover: #cdbfff;
+  --btn-text: #3d2d86;
+  /* Puntitos del fondo */
+  --dot-1: #ffd9e7;
+  --dot-2: #d5ebff;
+  --shadow: 0 2px 4px rgba(122, 98, 216, .05), 0 12px 32px rgba(122, 98, 216, .08);
+  --shadow-sm: 0 1px 3px rgba(122, 98, 216, .08);
   --radius: 18px;
   --radius-sm: 12px;
   --on-brand: #ffffff;
@@ -42,45 +49,8 @@
   --mono: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
 }
 
-/* Tema oscuro. Se aplica en dos casos:
-   1. el sistema lo prefiere y el usuario no eligió explícitamente el tema claro;
-   2. el contenedor marca el documento con data-theme="dark".
-   Solo se redefinen las variables: los componentes nunca declaran un color
-   dentro de un bloque de tema, para que ambos temas resuelvan completos. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #17142a;
-    --surface: #211d38;
-    --surface-2: #29244a;
-    --border: #3a3460;
-    --text: #f1eeff;
-    --text-soft: #c3bce0;
-    --text-faint: #9a92bd;
-    --brand: #b8a6ff;
-    --brand-strong: #d3c8ff;
-    --brand-soft: #312a5c;
-    --accent: #ffbf94;
-    --accent-soft: #43301f;
-    --ok: #8ee0b4;
-    --ok-soft: #1e3a2e;
-    --warn: #ffe08a;
-    --warn-soft: #3d3418;
-    --danger: #ff9fb6;
-    --danger-soft: #45202d;
-    --info: #9fcbff;
-    --info-soft: #1c2f4a;
-    --p-lilac: #2e2852;
-    --p-mint: #1e3a33;
-    --p-peach: #3e2c26;
-    --p-sky: #1f3149;
-    --p-pink: #3f2338;
-    --p-butter: #3b3520;
-    --on-brand: #1d1640;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35);
-  }
-}
-
+/* Tema oscuro: solo se aplica si el documento se marca con data-theme="dark".
+   Por defecto la aplicacion se muestra siempre en la paleta pastel clara. */
 :root[data-theme="dark"] {
   --bg: #17142a;
   --surface: #211d38;
@@ -108,6 +78,11 @@
   --p-sky: #1f3149;
   --p-pink: #3f2338;
   --p-butter: #3b3520;
+  --btn: #b8a6ff;
+  --btn-hover: #cbbcff;
+  --btn-text: #1d1640;
+  --dot-1: #2f2440;
+  --dot-2: #22304a;
   --on-brand: #1d1640;
   --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35);
@@ -120,6 +95,8 @@ html, body { height: 100%; }
 body {
   margin: 0;
   background:
+    radial-gradient(circle, var(--dot-1) 2.5px, transparent 3px) 0 0 / 44px 44px,
+    radial-gradient(circle, var(--dot-2) 2.5px, transparent 3px) 22px 22px / 44px 44px,
     radial-gradient(circle at 6% 10%, var(--p-pink) 0, transparent 26rem),
     radial-gradient(circle at 96% 6%, var(--p-sky) 0, transparent 24rem),
     radial-gradient(circle at 90% 96%, var(--p-mint) 0, transparent 28rem),
@@ -143,7 +120,7 @@ a { color: var(--brand); }
 /* ---------- Layout ---------- */
 .app-header {
   position: sticky; top: 0; z-index: 40;
-  background: var(--surface);
+  background: linear-gradient(90deg, var(--p-pink), var(--p-lilac) 50%, var(--p-sky));
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
@@ -158,11 +135,11 @@ a { color: var(--brand); }
 .brand { display: flex; align-items: center; gap: .6rem; margin-right: auto; }
 .brand__mark {
   width: 40px; height: 40px; border-radius: 14px; flex: none;
-  background: linear-gradient(140deg, var(--p-pink), var(--p-lilac));
+  background: var(--surface); box-shadow: var(--shadow-sm);
   display: grid; place-items: center; font-size: 1.25rem;
 }
-.brand__name { font-weight: 800; font-size: 1.02rem; }
-.brand__sub { font-size: .74rem; color: var(--text-faint); letter-spacing: .04em; text-transform: uppercase; }
+.brand__name { font-weight: 800; font-size: 1.02rem; color: var(--brand-strong); }
+.brand__sub { font-size: .74rem; color: var(--text-soft); letter-spacing: .04em; text-transform: uppercase; }
 
 .userchip { display: flex; align-items: center; gap: .6rem; }
 .userchip__avatar {
@@ -174,7 +151,7 @@ a { color: var(--brand); }
 .userchip__name { font-weight: 600; font-size: .88rem; }
 .userchip__role { font-size: .74rem; color: var(--text-soft); }
 
-.app-nav { border-top: 1px solid var(--border); background: var(--surface-2); }
+.app-nav { border-top: 1px solid var(--border); background: var(--surface); }
 .app-nav__inner {
   max-width: 1180px; margin: 0 auto; padding: .45rem 1.1rem;
   display: flex; gap: .3rem; overflow-x: auto;
@@ -184,8 +161,8 @@ a { color: var(--brand); }
   color: var(--text-soft); text-decoration: none; white-space: nowrap;
   border-radius: 999px;
 }
-.app-nav a:hover { color: var(--text); background: var(--p-lilac); }
-.app-nav a.is-active { color: var(--brand-strong); background: var(--brand-soft); }
+.app-nav a:hover { color: var(--text); background: var(--p-pink); }
+.app-nav a.is-active { color: var(--btn-text); background: var(--btn); }
 
 main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
 
@@ -197,6 +174,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
 /* ---------- Page head ---------- */
 .page-head { display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
 .page-head__text { flex: 1 1 320px; }
+.page-head__text h1 { color: var(--brand-strong); }
 .page-head__text p { color: var(--text-soft); font-size: .9rem; margin: .25rem 0 0; }
 .page-head__actions { display: flex; gap: .5rem; flex-wrap: wrap; }
 
@@ -209,8 +187,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
 .card--flush { padding: 0; overflow: hidden; }
 .card__head {
   display: flex; align-items: center; gap: .7rem; flex-wrap: wrap;
-  padding: .9rem 1.1rem; border-bottom: 1px solid var(--border); background: var(--surface-2);
+  padding: .9rem 1.1rem; border-bottom: 1px solid var(--border); background: var(--p-sky);
 }
+.card:nth-of-type(3n+2) > .card__head { background: var(--p-pink); }
+.card:nth-of-type(3n+3) > .card__head { background: var(--p-mint); }
 .card__head h2, .card__head h3 { margin-right: auto; }
 .card__body { padding: 1.1rem; }
 .card__hint { font-size: .8rem; color: var(--text-faint); }
@@ -225,7 +205,15 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: .95rem 1rem; box-shadow: var(--shadow-sm);
 }
-.grid > .stat { border-color: transparent; }
+.grid > .stat { border-color: transparent; position: relative; overflow: hidden; }
+.grid > .stat .stat__label { padding-right: 2.2rem; }
+.grid > .stat::after {
+  position: absolute; right: .75rem; top: .6rem; font-size: 1.55rem; line-height: 1;
+}
+.grid > .stat:nth-child(4n+1)::after { content: "\1F9F8"; }
+.grid > .stat:nth-child(4n+2)::after { content: "\1F388"; }
+.grid > .stat:nth-child(4n+3)::after { content: "\2B50"; }
+.grid > .stat:nth-child(4n+4)::after { content: "\1F308"; }
 .grid > .stat:nth-child(4n+1) { background: var(--p-lilac); }
 .grid > .stat:nth-child(4n+2) { background: var(--p-mint); }
 .grid > .stat:nth-child(4n+3) { background: var(--p-peach); }
@@ -245,8 +233,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 1.4rem 1.1rem 4rem; }
 .btn:hover { filter: brightness(.97); }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
-.btn--primary { background: var(--brand); border-color: var(--brand); color: var(--on-brand); box-shadow: 0 4px 12px rgba(112, 88, 216, .25); }
-.btn--primary:hover { background: var(--brand-strong); }
+.btn--primary { background: var(--btn); border-color: var(--btn); color: var(--btn-text); box-shadow: 0 4px 12px rgba(122, 98, 216, .18); }
+.btn--primary:hover { background: var(--btn-hover); border-color: var(--btn-hover); }
 .btn--danger { background: var(--danger-soft); border-color: transparent; color: var(--danger); }
 .btn--ok { background: var(--ok-soft); border-color: transparent; color: var(--ok); }
 .btn--ghost { background: transparent; border-color: transparent; color: var(--brand); }
@@ -377,6 +365,7 @@ legend { font-size: .82rem; font-weight: 640; padding: 0 .4rem; color: var(--tex
   width: 1.3rem; height: 1.3rem; border-radius: 50%; display: grid; place-items: center;
   background: var(--surface); color: var(--brand); font-size: .75rem; font-weight: 800;
 }
+.login__deco { font-size: 2rem; letter-spacing: .35rem; margin-top: 1.8rem; }
 .login__form { padding: 2rem; }
 .login__demo { margin-top: 1.2rem; border-top: 1px solid var(--border); padding-top: .9rem; }
 .login__demo h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-faint); margin-bottom: .5rem; }
@@ -443,8 +432,8 @@ legend { font-size: .82rem; font-weight: 640; padding: 0 .4rem; color: var(--tex
 .receipt__total span:last-child { font-size: 1.35rem; }
 
 .bar { height: 9px; border-radius: 999px; background: var(--p-lilac); overflow: hidden; }
-.bar__fill { height: 100%; border-radius: 999px; background: var(--brand); }
-.bar__fill--full { background: var(--danger); }
+.bar__fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #9fe3c1, #9fcbff); }
+.bar__fill--full { background: linear-gradient(90deg, #ffb3c7, #ff9fb6); }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
